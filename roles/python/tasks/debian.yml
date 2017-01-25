@@ -1,0 +1,7 @@
+- name: ensure python development library headers are installed
+  apt: name=python-dev state=latest
+  sudo: yes
+
+- name: ensure python setup-tools is installed
+  apt: name=python-setuptools state=present
+  sudo: yes

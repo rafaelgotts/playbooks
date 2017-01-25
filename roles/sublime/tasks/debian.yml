@@ -1,0 +1,10 @@
+# Copied from: https://github.com/jdauphant/ansible-role-sublimetext
+
+- name: "Download sublimetext's .deb file"
+  get_url: url={{sublimetext_url_deb}} dest={{sublimetext_tmp_deb}}
+  tags: ["packages","sublimetext"]
+
+- name: Install sublimetext for Debian family OS
+  sudo: yes
+  apt: deb={{sublimetext_tmp_deb}}
+  tags: ["packages","sublimetext"]

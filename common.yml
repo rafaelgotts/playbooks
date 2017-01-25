@@ -1,0 +1,11 @@
+- hosts: all
+  roles:
+    - os
+    - git
+    - python
+    - python3
+    - vim
+    - terminator
+    - spotify
+    - chrome
+    - sublime

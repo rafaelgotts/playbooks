@@ -1,0 +1,15 @@
+# Copied from: https://github.com/iknite/ansible-spotify
+
+- name: Add apt keys
+  sudo: yes
+  apt_key: keyserver=keyserver.ubuntu.com id={{ item }}
+  with_items:
+    - BBEBDCB318AD50EC6865090613B00F1FD2C19886
+
+- name: Add repository
+  sudo: yes
+  apt_repository: repo='deb http://repository.spotify.com stable non-free'
+
+- name: Install spotify
+  sudo: yes
+  apt: name=spotify-client update_cache=yes state=latest

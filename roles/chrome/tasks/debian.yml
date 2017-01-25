@@ -1,0 +1,24 @@
+# Copied from: https://github.com/cmprescott/ansible-role-chrome
+
+- name: "apt | ensure Google linux signing key present"
+  sudo: yes
+  apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub state=present
+
+- name: "apt | ensure previous repository for Google Chrome is absent, as Google removed the x86 distribution"
+  sudo: yes
+  apt_repository: repo='deb http://dl.google.com/linux/chrome/deb/ stable main' state=absent
+
+- name: "apt | ensure Google chrome repo present, using a workaround for missing x86 distribution"
+  sudo: yes
+  copy:
+    content: "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
+    dest: "/etc/apt/sources.list.d/google-chrome.list"
+  register: google_repo
+
+- name: "apt | update cache"
+  sudo: yes
+  apt: update_cache=yes
+  
+- name: "apt | ensure Google chrome present"
+  sudo: yes
+  apt: name=google-chrome-stable state=present
