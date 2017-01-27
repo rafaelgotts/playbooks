@@ -1,2 +1,30 @@
-- include: debian.yml
+
+- include: py2.debian.yml
   when: ansible_os_family == 'Debian'
+
+- include: py3.debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: install pip
+  easy_install: name=pip
+  sudo: yes
+
+- name: install and upgrade python packages
+  pip: name={{ item }} state=latest
+  sudo: yes
+  with_items:
+      - pip
+      - virtualenv
+      - virtualenvwrapper
+      - flake8
+
+- name: include virtualenvwrapper config on bashrc
+  lineinfile:
+    state: present
+    dest: "{{ ansible_env.HOME }}/.bashrc"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: '^# virtualenvwrapper config', line: "\n# virtualenvwrapper config" }
+    - { regexp: '^export WORKON_HOME=', line: "export WORKON_HOME={{ ansible_env.HOME }}/.virtualenvs\n" }
+    - { regexp: '^source /usr/local/bin/virtualenvwrapper.sh', line: "source /usr/local/bin/virtualenvwrapper.sh" }
