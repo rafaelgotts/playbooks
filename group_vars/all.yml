@@ -11,3 +11,9 @@ sublimetext_tmp_deb: "/tmp/{{sublimetext_build}}sublimetext.deb"
 sublimetext_url_dmg: "{{sublimetext_dl_source}}/Sublime%20Text%20Build%20{{sublimetext_build}}.dmg"
 sublimetext_tmp_dmg: "/tmp/{{sublimetext_build}}sublimetext.dmg"
 sublimetext_mount: "/Volumes/Sublime Text/"
+
+# --- Dropbox ---
+dropbox_dl_source: 'https://www.dropbox.com/download?dl=packages'
+dropbox_deb_file: 'dropbox_2015.10.28_amd64.deb'
+dropbox_url_deb: '{{ dropbox_dl_source }}/debian/{{ dropbox_deb_file }}'
+dropbox_tmp_deb: '/tmp/{{ dropbox_deb_file }}'

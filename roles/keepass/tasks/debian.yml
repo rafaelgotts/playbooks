@@ -1,0 +1,4 @@
+
+- name: Install keepass for Debian family OS
+  sudo: yes
+  apt: name=keepass2 state=present

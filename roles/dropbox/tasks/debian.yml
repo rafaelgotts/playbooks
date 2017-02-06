@@ -1,0 +1,13 @@
+
+- name: "Download dropbox's .deb file"
+  get_url: url={{dropbox_url_deb}} dest={{ dropbox_tmp_deb }}
+
+- name: Install dropbox for Debian family OS
+  sudo: yes
+  apt: deb={{ dropbox_tmp_deb }}
+
+- name: Install dropbox-deamon
+  command: cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+
+- name: Set autostart for input login on restart
+  command: dropbox autostart y  
